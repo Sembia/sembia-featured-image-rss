@@ -17,7 +17,8 @@ add_action('rss2_item', 'feat_img_rss_node');
 function feat_img_rss_node() {
 	global $post;
 	if(has_post_thumbnail($post->ID)):
-		$thumbnail = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
+        $thumbnail_arr = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
+        $thumbnail = !empty($thumbnail_arr[0]) ? $thumbnail_arr[0] : '';
 		echo("<image>{$thumbnail}</image>");
 	endif;
 }
